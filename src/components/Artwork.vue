@@ -1,11 +1,13 @@
-<script setup lang="ts">
+<script setup lang = "ts">
 	// ToDo
 </script>
 
 <template>
-	<div id="artwork"></div>
+	<div id = "artwork"></div>
 </template>
 
 <style scoped>
-	#artwork { background-color: #FFF8 }
+	#artwork {
+		background-color: #FFF
+	}
 </style>
