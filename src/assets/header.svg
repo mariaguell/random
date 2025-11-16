@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="50">
+	<g fill="none" stroke="white" stroke-width="2">
+		<path d="m 150 25 m -25 0 l 25 -25 l 25 25 l -25 25 z" />
+		<path d="m 120 25 m -15 0 l 15 -15 l 15 15 l -15 15 z" />
+		<path d="m 180 25 m -15 0 l 15 -15 l 15 15 l -15 15 z" />
+		<circle cx="50" cy="25" r="5" />
+		<circle cx="250" cy="25" r="5" />
+		<circle cx="025" cy="25" r="2.5" />
+		<circle cx="275" cy="25" r="2.5" />
+		<line x1="55" x2="105" y1="25" y2="25" />
+		<line x1="195" x2="245" y1="25" y2="25" />
+	</g>
+</svg>

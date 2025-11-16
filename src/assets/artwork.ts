@@ -1,4 +1,6 @@
-export function initArtwork() {
+import { random } from 'lodash';
+
+export function initArtwork(): void {
 	const encoded = encodeURIComponent( generate() )
 	const img = `url("data:image/svg+xml,${ encoded }")`
 	const elements = document.querySelectorAll( '.bg' )
@@ -57,10 +59,6 @@ function makeIconLeaf( x: number, y: number, size: number, r: number ): Icon {
 	const s = size / 10
 	const leaf = `l ${ s } -${ s } l -${ s } ${ s } l 0 -${ s } l -${ s } -${ s } l ${ s } ${ s } l 0 -${ s }`
 	return `<path transform="rotate( ${ r } )" d="m ${ x } ${ y - size / 2 } l 0 ${ size } l 0 -${ s * 3 } ${ leaf } ${ leaf } ${ leaf } l ${ s } -${ s } l -${ s } ${ s } l 0 -${ s }" />`
-}
-
-function random( min: number, max: number ): number {
-	return Math.floor( Math.random() * ( max - min + .999 ) + min )
 }
 
 function randomFromArray<T>( list: T[] ): T {
