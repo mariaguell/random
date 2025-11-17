@@ -16,7 +16,7 @@ export class Item {
 	}
 
 	public get link(): string {
-		return `https://mariaguell.cat/random/s/${ this.slug }.html?${ this.query }`
+		return `./artworks/${ this.slug }.html?${ this.query }`
 	}
 
 	public get query(): string {
