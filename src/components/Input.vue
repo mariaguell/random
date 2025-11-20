@@ -1,13 +1,16 @@
 <script setup lang = "ts">
-	import type { Item, Param } from '../data.ts';
+	import { isNil } from 'lodash';
+	import type { Param } from '../models/Param.ts';
 
 	const props = defineProps<{ param: Param }>()
-	const emit = defineEmits<{ ( e: 'change', value: number ): void }>()
+	const emit = defineEmits<{ ( e: 'change', value: string ): void }>()
 
 	function selectItem( ev: Event ): void {
-		emit( 'change', ev.target.value )
+		if ( isNil( ( ev.target ) ) ) return
+		const aaa = ev.target as HTMLInputElement
+		emit( 'change', aaa.value )
 	}
-	</script>
+</script>
 
 <template>
 	<div>

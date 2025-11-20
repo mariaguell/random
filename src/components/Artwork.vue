@@ -1,12 +1,11 @@
 <script setup lang = "ts">
-	import type { Item } from '../data.ts';
 	import Input from './Input.vue'
+	import type { Item } from '../models/Item.ts';
 
 	const props = defineProps<{ item: Item }>()
 
-	function updateArtwork( value: number ): void {
-		const bbb = props.item.params.map( el => `${el.key}=${el.value}` ).join( '&' )
-		console.log("updateArtwork", bbb)
+	function updateArtwork( value: string ): void {
+		props.item.params.map( el => `${ el.key }=${ el.value }` ).join( '&' )
 	}
 </script>
 

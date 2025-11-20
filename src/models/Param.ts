@@ -7,7 +7,7 @@ export class Param {
 		public key: string,
 		public min: number,
 		public max_?: number,
-		private step_: number = 1
+		public step_: number = 1
 	) {
 		this.value = this.randomValue.toString()
 	}

@@ -6,8 +6,8 @@ export class Item {
 	constructor(
 		public title: string,
 		public date: string,
-		public description?: string,
-		private slug: string,
+		public description: string | null,
+		public slug: string,
 		public params: Param[]
 	) {}
 

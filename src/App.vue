@@ -2,7 +2,8 @@
 	import { ref } from 'vue'
 	import Artwork from './components/Artwork.vue'
 	import Menu from './components/Menu.vue'
-	import { artworks, type Item } from './data.ts';
+	import { artworks } from './data.ts';
+	import type { Item } from './models/Item.ts';
 
 	const isMenuOpen = ref( false )
 	const selected = ref( artworks[0]! )

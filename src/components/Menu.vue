@@ -1,6 +1,7 @@
 <script setup lang = "ts">
 	import { ref } from 'vue'
-	import { type Item, artworks } from '../data.ts';
+	import { artworks } from '../data.ts';
+	import type { Item } from '../models/Item.ts';
 
 	const items = ref( artworks )
 	const emit = defineEmits<{ ( e: 'select', item: Item ): void }>()
