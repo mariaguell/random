@@ -14,3 +14,15 @@
 * [ ] Millorar menú
 * [ ] El marc i l'artwork son de colors massa similars
 * [ ] Fer un icone de carrega
+
+## Manual
+
+Deploy per github pages:
+
+```sh
+# install
+$ npm install gh-pages --save-dev
+
+# usage
+$ gh-pages -d dist
+```
