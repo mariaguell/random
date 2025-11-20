@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+		<title>Spirograph</title>
+	
+		<link rel="stylesheet" href="../artwork.css">
+		<script src="../p5.js"></script>
+		<script src="../data.js"></script>
+		<script src="../artwork.js"></script>
+	</head>
+	<body></body>
+	<script>
+		// ?a=1&base_color_hue=60&dx_quotient=200&count=5&noise_factor=200&stroke_weight=2
+
+
+		// https://seedcode.com/SpirographN/sgn.html
+
+		const MODE_DEBUG = true;
+		const gears = [ ];
+
+		function setup( ) {
+			createCanvas( window.innerWidth, window.innerHeight );
+			frameRate( 48 );
+			colorMode( HSL );
+			angleMode( radians );
+			initGears( );
+			stroke( 248 );
+			strokeWeight( 1 );
+			noFill( );
+			background( 12 );
+		}
+
+		function draw( ) {
+			if ( MODE_DEBUG ) background( 12 );
+			gears.forEach( gear => gear.draw( ) );
+			aaa( );
+		}
+
+		function aaa( ) {
+			gears[ gears.length - 1 ].display( );
+		}
+
+		function initGears( ) {
+			const sun = new StatorGear( createVector( width * .5, height * .5 ), .5 );
+			sun.setColor( 1 );
+			const earth = new RotorGear( sun, .4 );
+			earth.setColor( 5 );
+			const moon = new PenGear( earth, 1 );
+			moon.setColor( 10 );
+			gears.push( sun, earth, moon );
+		}
+
+		function c( colorIndex ) {
+			return [ colorIndex * 30, 90, 60, .8 ];
+		}
+
+		class Gear {
+			constructor ( ) {
+				this.setColor( 0 );
+				this.alpha = 0;
+			}
+			draw ( ) {
+				this.update( );
+				if ( MODE_DEBUG ) this.displayHelper( );
+			}
+			setColor ( colorIndex ) {
+				this.color = c( colorIndex );
+			}
+		}
+		class RotorGear extends Gear {
+			constructor ( parent, dimRatio ) {
+				super( );
+				this.parent = parent;
+				this.dim = this.parent.dim * dimRatio;
+				this.speed = 1/dimRatio * parent.speed;
+			}
+			update ( ) {
+				this.alpha += this.speed;
+			}
+			displayHelper ( ) {
+				stroke( this.color );
+				strokeWeight( 4 );
+				const g = this.pos;
+				circle( g.x, g.y, this.dim );
+				strokeWeight( 12 );
+				point( g.x, g.y );
+			}
+			get pos ( ) {
+				return createVector(
+					this.parent.pos.x + cos( this.alpha ) * ( this.parent.dim - this.dim ) * .5,
+					this.parent.pos.y + sin( this.alpha ) * ( this.parent.dim - this.dim ) * .5 
+				);
+			}
+		}
+		class PenGear extends Gear {
+			constructor ( parent, lengthRatio ) {
+				super( );
+				this.parent = parent;
+				this.length = this.parent.dim * lengthRatio;
+				this.speed = 1/lengthRatio * parent.speed;
+			}
+			update ( ) {
+				this.alpha += this.speed;
+			}
+			display ( ) {
+				const p = this.pos;
+				point( p.x, p.y );
+			}
+			displayHelper ( ) {
+				stroke( this.color );
+				const p1 = this.pos;
+				strokeWeight( 10 );
+				point( p1.x, p1.y );
+				const p2 = this.parent.pos;
+				strokeWeight( 4 );
+				line( p1.x, p1.y, p2.x, p2.y );
+			}
+			get pos ( ) {
+				return createVector(
+					this.parent.pos.x + cos( this.alpha ) * this.length * .5,
+					this.parent.pos.y + sin( this.alpha ) * this.length * .5 
+				);
+			}
+		}
+		class StatorGear extends Gear {
+			constructor ( pos, dimRatio ) {
+				super( );
+				this.pos = pos;
+				this.dim = width * dimRatio;
+				this.color = 0;
+				this.speed = .01;
+			}
+			update ( ) { }
+			display ( ) { }
+			displayHelper ( ) {
+				stroke( this.color );
+				strokeWeight( 4 );
+				circle( this.pos.x, this.pos.y, this.dim );
+				strokeWeight( 12 );
+				point( this.pos.x, this.pos.y );
+			}
+		}
+	</script>
+</html>
